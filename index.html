@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revitale - Clínica Médica</title>
+    <title>Revitale - Medicina de Excelência</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            light: '#4fd1c5', // Verde Água
-                            DEFAULT: '#319795', // Verde Principal
-                            dark: '#285e61', // Verde Escuro
-                            accent: '#2b6cb0', // Azul Real
+                        royal: {
+                            light: '#00337a',
+                            DEFAULT: '#00204a', // Azul Royal Profundo
+                            dark: '#00132e',
+                        },
+                        gold: {
+                            light: '#f3e5ab',
+                            DEFAULT: '#d4af37', // Dourado Clássico
+                            dark: '#aa8c2c',
+                            accent: '#ffbf00'
                         }
+                    },
+                    fontFamily: {
+                        sans: ['Lato', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     }
                 }
             }
@@ -27,199 +40,303 @@
     </script>
     
     <style>
-        /* Ajuste suave na rolagem */
-        html { scroll-behavior: smooth; }
         .hero-bg {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-image: linear-gradient(to right, rgba(0, 32, 74, 0.95), rgba(0, 32, 74, 0.7)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Efeito de brilho no botão dourado */
+        .btn-gold {
+            background: linear-gradient(45deg, #aa8c2c, #d4af37, #f3e5ab, #d4af37);
+            background-size: 300% 100%;
+            transition: all 0.4s ease-in-out;
+        }
+        .btn-gold:hover {
+            background-position: 100% 0;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body class="font-sans text-gray-700 bg-gray-50">
 
-    <header class="bg-white shadow-md fixed w-full z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <header class="bg-white shadow-md fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="https://sttones10.github.io/revitale/logotipo-Revitale.jpg" alt="Logo Revitale" class="h-12 w-auto object-contain">
+                <img src="https://sttones10.github.io/revitale/logotipo-Revitale.jpg" alt="Logo Revitale" class="h-14 w-auto object-contain">
             </div>
 
-            <nav class="hidden md:flex space-x-6 items-center">
-                <a href="#inicio" class="hover:text-brand font-medium">Início</a>
-                <a href="#servicos" class="hover:text-brand font-medium">Especialidades</a>
-                <a href="#doutores" class="hover:text-brand font-medium">Corpo Clínico</a>
-                <a href="#contato" class="bg-brand hover:bg-brand-dark text-white px-5 py-2 rounded-full font-bold transition">
-                    <i class="fab fa-whatsapp mr-1"></i> Quero Agendar
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#inicio" class="text-royal hover:text-gold transition font-bold text-sm tracking-wider uppercase">Início</a>
+                <a href="#servicos" class="text-royal hover:text-gold transition font-bold text-sm tracking-wider uppercase">Especialidades</a>
+                <a href="#doutores" class="text-royal hover:text-gold transition font-bold text-sm tracking-wider uppercase">Corpo Clínico</a>
+                <a href="#contato" class="btn-gold text-royal-dark px-6 py-2 rounded-full font-bold shadow-lg">
+                    Agendar Agora
                 </a>
             </nav>
 
-            <button class="md:hidden text-brand-dark text-2xl">
+            <button onclick="toggleMenu()" class="md:hidden text-royal text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-xl">
+            <nav class="flex flex-col p-4 space-y-4 text-center">
+                <a href="#inicio" onclick="toggleMenu()" class="text-royal hover:text-gold py-2 border-b border-gray-100 font-bold">Início</a>
+                <a href="#servicos" onclick="toggleMenu()" class="text-royal hover:text-gold py-2 border-b border-gray-100 font-bold">Especialidades</a>
+                <a href="#doutores" onclick="toggleMenu()" class="text-royal hover:text-gold py-2 border-b border-gray-100 font-bold">Médicos</a>
+                <a href="#contato" onclick="toggleMenu()" class="btn-gold text-royal font-bold py-3 rounded-lg mt-2 shadow-md">Agendar Consulta</a>
+            </nav>
+        </div>
     </header>
 
-    <section id="inicio" class="hero-bg h-screen flex items-center justify-center text-center px-4 pt-16">
-        <div class="max-w-3xl text-white">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 leading-tight">
-                Cuidando da sua saúde com excelência e humanização
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 font-light">
-                Especialistas em Cardiologia, Saúde do Idoso e Atendimento Domiciliar.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="https://wa.me/5500000000000" class="bg-green-500 hover:bg-green-600 text-white text-lg font-bold py-4 px-8 rounded-full shadow-lg transform hover:scale-105 transition flex items-center justify-center">
-                    <i class="fab fa-whatsapp mr-2"></i> Quero fazer uma consulta
-                </a>
-                <a href="#servicos" class="bg-white hover:bg-gray-100 text-brand-dark text-lg font-bold py-4 px-8 rounded-full shadow-lg transition">
-                    Conhecer Serviços
-                </a>
+    <section id="inicio" class="hero-bg min-h-screen flex items-center relative">
+        <div class="container mx-auto px-4 pt-20">
+            <div class="max-w-3xl text-white">
+                <div class="inline-block px-3 py-1 border border-gold rounded-full text-gold text-sm font-bold tracking-widest mb-4 animate-pulse">
+                    EXCELÊNCIA EM SAÚDE
+                </div>
+                <h1 class="font-serif text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                    Sua saúde merece <br>
+                    <span class="text-gold italic">tratamento real.</span>
+                </h1>
+                <p class="text-lg md:text-xl mb-10 text-gray-300 font-light max-w-xl border-l-4 border-gold pl-4">
+                    Especialistas em Cardiologia e Saúde do Idoso. Atendimento humanizado no consultório ou no conforto do seu lar.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="https://wa.me/5500000000000" class="btn-gold text-royal-dark text-lg font-bold py-4 px-10 rounded-full shadow-2xl flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-xl"></i> Agendar Consulta
+                    </a>
+                    <a href="#servicos" class="border border-white hover:bg-white hover:text-royal text-white text-lg font-bold py-4 px-10 rounded-full transition duration-300 flex items-center justify-center">
+                        Conhecer Clínica
+                    </a>
+                </div>
             </div>
+        </div>
+        
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[50px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="fill-gray-50"></path>
+            </svg>
         </div>
     </section>
 
-    <section id="servicos" class="py-20 bg-white">
+    <section id="servicos" class="py-24 bg-gray-50 relative">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-brand-dark mb-2">Nossas Especialidades</h2>
-                <div class="w-20 h-1 bg-brand mx-auto rounded"></div>
+                <h2 class="font-serif text-4xl font-bold text-royal mb-3">Nossas Especialidades</h2>
+                <div class="w-24 h-1 bg-gold mx-auto rounded"></div>
+                <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Tecnologia avançada aliada ao cuidado tradicional.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-xl transition border border-gray-100 text-center">
-                    <div class="text-brand text-4xl mb-4"><i class="fas fa-heartbeat"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Cardiologia</h3>
-                    <p class="text-gray-600 text-sm mb-4">Check-ups completos, prevenção e tratamento de doenças cardiovasculares.</p>
+                <div class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-transparent hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-royal/10 rounded-full flex items-center justify-center text-royal text-3xl mb-6 group-hover:bg-royal group-hover:text-gold transition">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-royal mb-3">Cardiologia</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Check-ups completos, eletrocardiograma e prevenção de doenças cardiovasculares.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-xl transition border border-gray-100 text-center">
-                    <div class="text-brand text-4xl mb-4"><i class="fas fa-user-plus"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Saúde do Idoso</h3>
-                    <p class="text-gray-600 text-sm mb-4">Geriatria preventiva e acompanhamento focado na longevidade e qualidade de vida.</p>
+                
+                <div class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-transparent hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-royal/10 rounded-full flex items-center justify-center text-royal text-3xl mb-6 group-hover:bg-royal group-hover:text-gold transition">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-royal mb-3">Geriatria</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Acompanhamento especializado para longevidade saudável e qualidade de vida.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-xl transition border border-gray-100 text-center">
-                    <div class="text-brand text-4xl mb-4"><i class="fas fa-home"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Visita Domiciliar</h3>
-                    <p class="text-gray-600 text-sm mb-4">Atendimento médico humanizado no conforto e segurança do seu lar.</p>
+
+                <div class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-transparent hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-royal/10 rounded-full flex items-center justify-center text-royal text-3xl mb-6 group-hover:bg-royal group-hover:text-gold transition">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-royal mb-3">Home Care</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Visita domiciliar médica. Levamos o consultório até a segurança do seu lar.</p>
                 </div>
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm hover:shadow-xl transition border border-gray-100 text-center">
-                    <div class="text-brand text-4xl mb-4"><i class="fas fa-stethoscope"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Clínica Médica</h3>
-                    <p class="text-gray-600 text-sm mb-4">Consultas de rotina, diagnósticos precisos e orientação de saúde geral.</p>
+
+                <div class="group bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition duration-300 border-t-4 border-transparent hover:border-gold hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-royal/10 rounded-full flex items-center justify-center text-royal text-3xl mb-6 group-hover:bg-royal group-hover:text-gold transition">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-royal mb-3">Clínica Geral</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Diagnósticos precisos, exames de rotina e orientação integral de saúde.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="text-center mt-12">
-                <a href="https://wa.me/5500000000000" class="inline-block bg-brand hover:bg-brand-dark text-white font-bold py-3 px-8 rounded-full shadow-md transition">
-                    Quero Agendar meu Check-up
+    <section id="doutores" class="py-24 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="font-serif text-4xl font-bold text-royal mb-2">Corpo Clínico</h2>
+                    <div class="w-20 h-1 bg-gold rounded"></div>
+                </div>
+                <a href="https://wa.me/5500000000000" class="text-royal font-bold hover:text-gold transition flex items-center gap-2">
+                    Ver todos os profissionais <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
-        </div>
-    </section>
 
-    <section id="doutores" class="py-20 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-brand-dark mb-2">Nossa Equipe Médica</h2>
-                <div class="w-20 h-1 bg-brand mx-auto rounded"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col items-center p-6 text-center">
-                    <img src="https://ui-avatars.com/api/?name=Rafael+Ferreira&background=random&size=200" alt="Dr. Rafael Ferreira Nunes" class="w-32 h-32 rounded-full mb-4 object-cover border-4 border-brand-light">
-                    <h3 class="text-xl font-bold text-gray-800">Dr. Rafael Ferreira Nunes</h3>
-                    <p class="text-brand font-medium mb-2">Clínica Médica & Saúde do Idoso</p>
-                    <p class="text-gray-500 text-sm mb-6">Especialista em atendimento humanizado e visitas domiciliares, levando cuidado onde você estiver.</p>
-                    <a href="https://wa.me/5500000000000" class="w-full block bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-lg transition">
-                        Agendar com Dr. Rafael
-                    </a>
+            <div class="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row bg-gray-50 rounded-2xl overflow-hidden shadow-lg border border-gray-100 group">
+                    <div class="md:w-2/5 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Dr. Rafael" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-royal/20 group-hover:bg-transparent transition"></div>
+                    </div>
+                    <div class="p-8 md:w-3/5 flex flex-col justify-center">
+                        <h3 class="font-serif text-2xl font-bold text-royal">Dr. Rafael Nunes</h3>
+                        <p class="text-gold font-bold uppercase text-xs tracking-wider mb-4">Clínica Médica & Geriatria</p>
+                        <p class="text-gray-600 text-sm mb-6">"Minha missão é levar cuidado humanizado onde o paciente estiver, com foco total no bem-estar."</p>
+                        <a href="#" class="text-royal hover:text-gold font-bold text-sm uppercase tracking-wide">Agendar Consulta →</a>
+                    </div>
                 </div>
 
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg flex flex-col items-center p-6 text-center">
-                    <img src="https://ui-avatars.com/api/?name=Raissa+Melo&background=random&size=200" alt="Dra. Raíssa Melo Oliva" class="w-32 h-32 rounded-full mb-4 object-cover border-4 border-brand-light">
-                    <h3 class="text-xl font-bold text-gray-800">Dra. Raíssa Melo Oliva</h3>
-                    <p class="text-brand font-medium mb-2">Cardiologista</p>
-                    <p class="text-gray-500 text-sm mb-6">Cuidando do seu coração com tecnologia de ponta e atenção aos detalhes.</p>
-                    <a href="https://wa.me/5500000000000" class="w-full block bg-green-500 hover:bg-green-600 text-white font-bold py-2 rounded-lg transition">
-                        Agendar com Dra. Raíssa
-                    </a>
+                <div class="flex flex-col md:flex-row bg-gray-50 rounded-2xl overflow-hidden shadow-lg border border-gray-100 group">
+                    <div class="md:w-2/5 relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Dra. Raíssa" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-royal/20 group-hover:bg-transparent transition"></div>
+                    </div>
+                    <div class="p-8 md:w-3/5 flex flex-col justify-center">
+                        <h3 class="font-serif text-2xl font-bold text-royal">Dra. Raíssa Melo</h3>
+                        <p class="text-gold font-bold uppercase text-xs tracking-wider mb-4">Cardiologia Avançada</p>
+                        <p class="text-gray-600 text-sm mb-6">"Saúde do coração requer precisão e carinho. Tratamentos modernos para sua vida."</p>
+                        <a href="#" class="text-royal hover:text-gold font-bold text-sm uppercase tracking-wide">Agendar Consulta →</a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-20 bg-brand text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-10">O que nossos pacientes dizem</h2>
+    <section class="py-24 bg-royal text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-gold opacity-10 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-blue-500 opacity-10 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <i class="fas fa-quote-left text-6xl text-gold opacity-30 mb-6"></i>
+            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-12">Experiências de quem confia</h2>
+            
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
-                    <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="italic mb-4">"A visita domiciliar do Dr. Rafael foi essencial para o tratamento do meu pai. Muito atencioso!"</p>
-                    <p class="font-bold">- Maria S.</p>
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition">
+                    <div class="text-gold mb-4 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="italic mb-6 text-gray-300">"A visita domiciliar salvou meu dia. O Dr. Rafael foi extremamente pontual e atencioso com minha mãe."</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-royal font-bold">M</div>
+                        <p class="font-bold text-gold">Maria Silva</p>
+                    </div>
                 </div>
-                <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
-                    <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="italic mb-4">"Dra. Raíssa é excelente. Explicou tudo sobre meu exame com muita clareza."</p>
-                    <p class="font-bold">- João P.</p>
+                
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition">
+                    <div class="text-gold mb-4 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="italic mb-6 text-gray-300">"Ambiente sofisticado e atendimento impecável. A Dra. Raíssa explicou tudo com muita clareza."</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-royal font-bold">J</div>
+                        <p class="font-bold text-gold">João Pedro</p>
+                    </div>
                 </div>
-                <div class="bg-white/10 p-6 rounded-xl backdrop-blur-sm">
-                    <div class="text-yellow-400 mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="italic mb-4">"Agendamento rápido pelo WhatsApp e atendimento pontual. Recomendo a clínica."</p>
-                    <p class="font-bold">- Ana C.</p>
+
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm hover:bg-white/10 transition">
+                    <div class="text-gold mb-4 text-sm"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="italic mb-6 text-gray-300">"Facilidade no agendamento pelo WhatsApp e consultório muito bem localizado. Recomendo!"</p>
+                    <div class="flex items-center justify-center gap-3">
+                        <div class="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-royal font-bold">A</div>
+                        <p class="font-bold text-gold">Ana Costa</p>
+                    </div>
                 </div>
             </div>
-            <div class="mt-10">
-                <a href="https://wa.me/5500000000000" class="inline-block bg-white text-brand-dark hover:bg-gray-100 font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
-                    Quero Agendar Agora
+
+            <div class="mt-16">
+                <a href="https://wa.me/5500000000000" class="btn-gold inline-block text-royal-dark font-bold py-4 px-12 rounded-full shadow-lg transition transform hover:scale-105">
+                    Quero Agendar Minha Consulta
                 </a>
             </div>
         </div>
     </section>
 
-    <section id="contato" class="py-20 bg-white">
+    <section id="contato" class="py-20 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-10 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold text-brand-dark mb-6">Onde Estamos</h2>
-                    <p class="text-gray-600 mb-6">Estamos prontos para atender você com conforto e segurança. Agende sua visita ou venha nos conhecer.</p>
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                <div class="p-10 md:w-1/2 flex flex-col justify-center">
+                    <h2 class="font-serif text-3xl font-bold text-royal mb-6">Entre em contato</h2>
+                    <p class="text-gray-600 mb-8">Estamos prontos para oferecer o melhor atendimento médico da região. Agende sua visita.</p>
                     
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-brand text-xl w-8"></i>
-                            <span>Rua Exemplo, 123 - Centro, Cidade - UF</span>
+                    <ul class="space-y-6">
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-royal/10 flex items-center justify-center text-royal mt-1 mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-royal">Localização</h4>
+                                <p class="text-gray-500 text-sm">Rua das Flores, 123 - Centro Médico, Sala 405</p>
+                            </div>
                         </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone text-brand text-xl w-8"></i>
-                            <span>(00) 1234-5678</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fab fa-whatsapp text-brand text-xl w-8"></i>
-                            <span>(00) 99999-9999</span>
+                        <li class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-royal/10 flex items-center justify-center text-royal mt-1 mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-royal">Telefone</h4>
+                                <p class="text-gray-500 text-sm">(11) 99999-9999</p>
+                            </div>
                         </li>
                     </ul>
 
-                    <a href="https://wa.me/5500000000000" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-lg shadow-md transition w-full md:w-auto text-center">
-                        <i class="fab fa-whatsapp mr-2"></i> Quero fazer uma consulta
+                    <a href="https://wa.me/5500000000000" class="mt-8 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-xl"></i> Chamar no WhatsApp
                     </a>
                 </div>
                 
-                <div class="h-80 bg-gray-200 rounded-2xl overflow-hidden shadow-inner">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.0!2d-46.6!3d-23.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMwJzAwLjAiUyA0NsKwMzYnMDAuMCJX!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="md:w-1/2 h-80 md:h-auto bg-gray-200 relative">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975860228717!2d-46.6520638!3d-23.5613375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzQwLjgiUyA0NsKwMzknMDcuNCJX!5e0!3m2!1spt-BR!2sbr!4v1625680000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0; filter: grayscale(100%) contrast(1.2);" allowfullscreen="" loading="lazy"></iframe>
+                    <div class="absolute inset-0 bg-royal mix-blend-multiply opacity-30 pointer-events-none"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-gray-800 text-gray-400 py-8 text-center">
-        <div class="container mx-auto px-4">
-            <img src="www.revitale.clic/logo.jpg" alt="Logo" class="h-10 mx-auto mb-4 opacity-70 grayscale">
-            <p>&copy; 2024 Clínica Revitale. Todos os direitos reservados.</p>
-            <p class="text-sm mt-2">Responsável Técnico: Dr. Rafael Ferreira Nunes</p>
+    <footer class="bg-royal-dark text-gray-400 py-12 border-t border-white/10">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start mb-4">
+                     <img src="https://sttones10.github.io/revitale/logotipo-Revitale.jpg" alt="Logo Revitale" class="h-12 w-auto object-contain rounded-md bg-white p-1">
+                </div>
+                <p class="text-sm">Responsável Técnico: Dr. Rafael Ferreira Nunes</p>
+                <p class="text-xs mt-1">CRM/UF 123456</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold hover:text-royal-dark transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold hover:text-royal-dark transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-gold hover:text-royal-dark transition"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="text-center mt-8 text-xs opacity-50 border-t border-white/5 pt-4">
+            © 2024 Clínica Revitale. Todos os direitos reservados.
         </div>
     </footer>
 
-    <a href="https://wa.me/5500000000000" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl z-50 text-3xl transition transform hover:scale-110 flex items-center justify-center w-16 h-16 animate-bounce">
+    <a href="https://wa.me/5500000000000" class="fixed bottom-6 right-6 btn-gold text-royal-dark p-4 rounded-full shadow-2xl z-50 text-3xl transition transform hover:scale-110 flex items-center justify-center w-16 h-16 animate-bounce">
         <i class="fab fa-whatsapp"></i>
     </a>
 
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                // Pequena animação de entrada
+                menu.style.opacity = '0';
+                menu.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    menu.style.transition = 'all 0.3s ease';
+                    menu.style.opacity = '1';
+                    menu.style.transform = 'translateY(0)';
+                }, 10);
+            } else {
+                menu.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
